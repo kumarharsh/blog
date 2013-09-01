@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Blog by kumarharsh</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <style>
+      .demo-list {
+        list-style: none;
+        padding: 0; margin: 0;
+      }
+      .demo-list li {
+        width: 100px;
+        height: 80px;
+        display: inline-block;
+      }
+      .demo-list li:hover {
+        background-color: green;
+      }
+      .bug li {
+        -webkit-transition: background 0.2s ease, 0.1s;
+        transition: background 0.2s ease, 0.1s;
+      }
+      .no-bug li {
+        -webkit-transition: background 0.2s ease 0.1s;
+        transition: background 0.2s ease 0.1s;
+      }
+    </style>
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/kumarharsh/blog">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/kumarharsh">My Profile</a></li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Blog</h1>
+          <p>An informal web-log</p>
+          <hr>
+          <span class="credits left">A blog by <a href="https://github.com/kumarharsh">Kumar Harsh</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h3>A Blinking Bug in Blink</h3>
+        <p>There is a weird bug in the blink rendering engine, as far as I've tested, it's present on Chrome <kbd>29.0.1547.57 (Official Build 217859)</kbd> on Ubuntu 13.04.</p>
+
+        <p>The bug has to deal with how blink interprets malformed <code>transition</code> properties. If the property name only has a time duration, it tries to do <em>something</em>, the nature of which I can only describe as a half-hearted blink thingy.</p>
+
+        <p>See for yourself: the first set of <code>&lt;li&gt;</code> items are bugless, the next set is with the bug. Quickly hover over the elements in a row, or move your mouse left-right. The buggy elements will blink even after your mouse has left their bounding box.</p>
+
+        <p>Note that the buggy set will behave perfectly normally in Firefox and Opera.</p>
+
+        <ul class="demo-list bug">
+          <li><a class="block">BUGGY</a></li>
+          <li><a class="block">HI</a></li>
+          <li><a class="block">ONE</a></li>
+          <li><a class="block">TWO</a></li>
+          <li><a class="block">BLINK</a></li>
+        </ul>
+        <ul class="demo-list no-bug">
+          <li><a class="block">NORMAL</a></li>
+          <li><a class="block">HI</a></li>
+          <li><a class="block">ONE</a></li>
+          <li><a class="block">TWO</a></li>
+          <li><a class="block">BLINK</a></li>
+        </ul>
+
+        <h3>What W3 Says</h3>
+        <p>According to the <a href="http://www.w3.org/TR/css3-transitions/#single-transition">single transition section</a> of the css3-transitions document, a single transition is defined as:
+
+        <pre>&lt;single-transition&gt; = [ none | &lt;single-transition-property&gt; ]
+                      || &lt;time&gt;
+                      || &lt;single-transition-timing-function&gt;
+                      || &lt;time&gt;
+        </pre>
+
+        <p>Now, since my transition function is <code>transition: background 0.2s ease, 0.1s;</code>, it can be broken down into two separate <em>single transitions</em>:</p>
+
+        <pre>
+          background 0.2s ease
+          --         0.1s --
+        </pre>
+
+        <p>Note that the second <em>single transition</em> does not have a <code>&lt;single-transition-property&gt;</code>, the absence of which should signify an invalid transition, or atleast be interpreted as <code>none</code>. This brings us to the second part of the same section, which says:
+
+          <blockquote>
+            If there is more than one &lt;single-transition&gt; in the shorthand, and any of the transitions has ‘none’ as the &lt;single-transition-property&gt;, then the declaration is invalid.
+          </blockquote>
+        </p>
+
+        <p>So, since we have 2 <code>single-transitions</code> in the shorthand, and one of the transition is either invalid, or has none as the <code>&lt;single-transition-property&gt;</code>, thus the declaration should be invalid, which quite clearly in Blink is not the case, hence the blink-bug-blink.</p>
+
+        <p>Well, that's it for today. Have a nice day.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+  </body>
+</html>
