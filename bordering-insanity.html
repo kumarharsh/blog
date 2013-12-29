@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Blog by kumarharsh</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <style>
+      #demo-area {
+        border: 1px solid #fc0;
+        background-color: black;
+        background-color: rgba(0, 0, 0, 0.5);
+        -webkit-box-shadow: inset 0 0 5px -3px #fc0;
+        -moz-box-shadow: inset 0 0 5px -3px #fc0;
+        box-shadow: inset 0 0 5px -3px #fc0;
+        padding: 30px 10px;
+        margin: 20px 0;
+        text-align: center;
+      }
+      .demo-div {
+        display: inline-block;
+        border-width: 30px;
+        margin: 0 20px;
+        width: 0;
+        height: 0;
+      }
+      .dotted {
+        border-style: dotted;
+        border-color: #fc0;
+      }
+      .rounded {
+        border-radius: 50%;
+      }
+      .translucent {
+        border-color: rgba(255, 255, 0, 0.4) rgba(255, 0, 0, 0.4);
+      }
+      .hourglass {
+        border-color: #fc0 transparent;
+      }
+      .demo-comparison {
+        margin-top: 10px;
+        border-top: 1px solid #f80;
+        padding-top: 10px;
+      }
+      .demo-comparison h2 {
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <nav>
+        <li class="fork"><a href="https://github.com/kumarharsh/blog">View On GitHub</a></li>
+        <li class="downloads"><a href="https://github.com/kumarharsh">My Profile</a></li>
+      </nav>
+    </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Blog</h1>
+          <p>An informal web-log</p>
+          <hr>
+          <span class="credits left">A blog by <a href="https://github.com/kumarharsh">Kumar Harsh</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h3>Bordering Insanity</h3>
+
+        <p>The bug has to deal with how Firefox renders dotted borders which <storng>are also rounded</storng>. When the div has a positive border-radius defined as well as the border-style is set to dotted, some funky stuff happens.</p>
+
+        <p>See for yourself:</p>
+        <ul>
+          <li>The first div has simple dotted borders on a rectangular box.</li>
+          <li>The next set has simple dotted borders on a rounded-border</li>
+          <li>To see more fun, see the third div, which has translucent border colours.</li>
+          <li>As a bonus, and an interesting design, I present to you the <strong>CSS Hourglass</strong>, made with one line of CSS and helped by some very bad implementation by Firefox!</li>
+        </ul>
+
+        <p>Although Chrome does handle these cases well, it does not really draw a <strong>dot</strong>
+          in the <em>dotted border</em>, but chooses to use ugly rectangular bits.</p>
+
+        <div id="demo-area">
+          <div class="demo-div dotted"></div>
+          <div class="demo-div dotted rounded"></div>
+          <div class="demo-div dotted rounded translucent"></div>
+          <div class="demo-div dotted rounded hourglass"></div>
+          <div class="demo-comparison">
+            <h2>How it is rendered in Firefox 26.0</h2>
+            <img src="assets/demo/bordering-insanity.png" alt="A preview of how it is rendered in Firefox 26.0">
+          </div>
+        </div>
+
+        <p>And with this I wrap up. Have fun.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+  </body>
+</html>
